@@ -16,7 +16,7 @@ In the following sections, we focus our discussion on maturity levels specific t
 We use this exercise with a maturity model so that we can think about how Kafka can be a powerful tool for one application or even evolve into the foundation for all of your enterprise’s applications rather than as a simple message broker. The following levels aren’t meant to be a step-by-step required path, but rather a way to think about how you might start and then progress with Kafka. These steps are debatable, of course, but we simply offer an example path.
 
 ### 11.1.1 Level 0
-At this level, we use Kafka as an enterprise service bus (ESB) or publish/subscribe (pub/sub) system. Events provide asynchronous communication between applications, whether we are replacing a different message broker like RabbitMQ or just starting with this pattern.
+At this level, we use Kafka as an ``enterprise service bus (ESB)`` or ``publish/subscribe (pub/sub)`` system. Events provide asynchronous communication between applications, whether we are replacing a different message broker like RabbitMQ or just starting with this pattern.
 
 One example use case is a user submitting a text document to be converted into a PDF. Once a user submits a document, the application stores the document and then sends a message to a Kafka topic. A Kafka consumer then reads the message to determine which documents need to be converted into a PDF. In this example, the drive might be offloaded to work with a backend system that a user knows will not send a response right away. Figure 11.1 shows this message bus in action.
 
@@ -27,16 +27,16 @@ Figure 11.1 Level 0 example
 This level alone brings us the benefit of allowing us to decouple a system so that a failure of our frontend text submission system does not impact our backend system. Also, we don’t need to rely on both to maintain successful simultaneous operations.
 
 ### 11.1.2 Level 1
-Batch processing can still be present in areas of our enterprise, but most data produced is now brought into Kafka. Whether with extract, transform, load (ETL) or change data capture (CDC) processes, Kafka starts to gather events from more and more systems in our enterprise. Level 1 allows us to have an operational, real-time data flow and gives us the ability to feed data quickly into analytical systems.
+Batch processing can still be present in areas of our enterprise, but most data produced is now brought into Kafka. Whether with ``extract, transform, load (ETL)`` or ``change data capture (CDC)`` processes, Kafka starts to gather events from more and more systems in our enterprise. Level 1 allows us to have an `operational`, ``real-time data flow`` and gives us the ability to feed data quickly into analytical systems.
 
-An example of this might be a vendor database that holds customer information. We do not want our marketing folks to run complex queries that could slow down our production traffic. In this case, we can use Kafka Connect to write the data from database tables into Kafka topics that we can use on our terms. Figure 11.2 shows Kafka Connect capturing data from a relational database and moving that data into a Kafka topic.
+An example of this might be a vendor database that holds customer information. We do not want our marketing folks to run complex queries that could slow down our production traffic. In this case, we can use `Kafka Connect` to write the data from database tables into Kafka topics that we can use on our terms. Figure 11.2 shows `Kafka Connect capturing data` from a relational database and moving that data into a Kafka topic.
 
 
 ![Level 1 example](./material/CH11_F02_Scott4.png)  
 Figure 11.2 Level 1 example
 
 ### 11.1.3 Level 2
-We realize that data will change over time and that schemas are needed. Although our producers and consumers might be decoupled, they still need a way to understand the data itself. For this, we’ll take advantage of schemas and a schema registry. And even though it would have been ideal to start with schemas, the reality is that this need often presents itself a couple of application changes later, after initial deployments.
+We realize that data will change over time and that schemas are needed. Although our producers and consumers might be decoupled, they still need a way to understand the data itself. For this, we’ll take advantage of `schemas and a schema registry`. And even though it would have been ideal to start with schemas, the reality is that this need often presents itself a couple of application changes later, after initial deployments.
 
 One example for this level is changing the data structure of an event to receive orders from our processing system. New data is added, but the new fields are optional, and this works fine because our schema registry is configured to support backward compatibility. Figure 11.3 shows our consumer’s need for schemas. We will look more into these details as we progress through this chapter.
 
@@ -47,7 +47,7 @@ Figure 11.3 Level 2 example
 ### 11.1.4 Level 3
 Everything is an event stream that is infinite (never ending). Kafka is the system of our enterprise for our event-based applications. In other words, we don’t have customers waiting for recommendations or status reports that used to be produced by an overnight batch-processing run. Customers are alerted in milliseconds of a change to their account when an event happens, not in minutes. Instead of pulling data from other data sources, applications pull data directly from your cluster. User-facing applications can derive state and materialized views to customers depending on the needs of our core Kafka infrastructure.
 
-11.2 The Schema Registry
+## 11.2 The Schema Registry
 As part of our work in this chapter, we will focus on level 2, looking at how we can plan for data to change over time. Now that we have become good at sending data into and out of Kafka, and despite a small mention of schemas in chapter 3, we left out some important details. Let’s dive into what the Confluent Schema Registry provides for us.
 
 The Confluent Schema Registry stores our named schemas and allows us to maintain multiple versions [4]. This is somewhat similar to the Docker Registry in purpose, which stores and distributes Docker images. Why is this storage needed? Producers and consumers are not tied together, but they still need a way to discover the schema involved in the data from all clients. Also, by having a remotely hosted registry, users do not have to run their copy locally or attempt to build their own, based on a list of schemas.
@@ -57,7 +57,7 @@ While schemas can provide a sort of interface for applications, we can also use 
 For Kafka, we can use the Confluent Schema Registry. Confluent provides an excellent option to consider as we look into how to take advantage of schemas. If you installed Kafka via the Confluent Platform before this chapter, you should have all the tools available to explore further. If not, we discuss installing and setting up this registry in the following sections.
 
 ### 11.2.1 Installing the Confluent Schema Registry
-The Confluent Schema Registry is a community software offering as part of the Confluent Platform [5]. The Schema Registry lives outside of Kafka Brokers, but itself uses Kafka as its storage layer with the topic name _schemas [6]. It is vital not to delete this topic accidentally!
+The Confluent Schema Registry is a ``community software`` offering as part of the Confluent Platform [5]. The Schema Registry lives outside of Kafka Brokers, but itself uses Kafka as its storage layer with the topic name _schemas [6]. It is vital ``not`` to delete this topic accidentally!
 
 ![Schema Registry infrastructure](./material/CH11_F04_Scott4.png) 
 Figure 11.4 Schema Registry infrastructure
@@ -101,7 +101,7 @@ We can check that the process is still running or use jps to verify this because
 The Confluent Schema Registry contains the following important components. One is a REST API (and the underlying application) for storing and fetching schemas. The second is client libraries for retrieving and managing local schemas. In the following sections, we’ll look a bit deeper into each of these two components, starting with the REST API.
 
 ### 11.3.1 REST API
-The REST API helps us manage the following resources: schemas, subjects, compatibility, and config [9]. Of these resources, “subjects” might need some explanation. We can create, retrieve, and delete versions and the subjects themselves. Let’s look at a topic and its related subject for an application using a topic named kinaction_schematest.
+The REST API helps us manage the following resources: **schemas**, **subjects**, **compatibility**, and **config** [9]. Of these resources, “subjects” might need some explanation. We can create, retrieve, and delete versions and the subjects themselves. Let’s look at a topic and its related subject for an application using a topic named ``kinaction_schematest``.
 
 In our schema registry, we will have a subject called kinaction_schematest-value because we are using the default behavior of basing the name on our current topic name. If we were using a schema for the message key as well, we would also have a subject called kinaction_schematest-key. Notice that the key and value are treated as different subjects [10]. Why is this? It ensures that we can version and change our schemas independently because the key and value are serialized separately.
 
