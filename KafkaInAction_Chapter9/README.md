@@ -520,4 +520,4 @@ Overall, Kafka provides us with many options to not only manage but also monitor
 1. “Interface ConsumerInterceptor.” Apache Software Foundation (n.d.). https://kafka.apache.org/27/javadoc/org/apache/kafka/clients/consumer/ConsumerInterceptor.html (accessed June 1, 2020).
 1. “Monitoring.” Apache Software Foundation (n.d.). https://kafka.apache.org/documentation/#monitoring (accessed May 1, 2020).
 1. Yahoo CMAK README.md. GitHub (March 5, 2020). https://github.com/yahoo/CMAK/blob/master/README.md (accessed July 20, 2021).
-1. README.md. LinkedIn Cruise Control for Apache Kafka GitHub (June 30, 2021). https://github.com/linkedin/cruise-control/blob/migrate_to_kafka_2 _4/README.md (acces-sed July 21, 2021).
+1. README.md. LinkedIn Cruise Control for Apache Kafka GitHub (June 30, 2021). https://github.com/linkedin/cruise-control/blob/migrate_to_kafka_2_4/README.md (acces-sed July 21, 2021).
