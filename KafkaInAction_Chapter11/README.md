@@ -65,7 +65,7 @@ Figure 11.4 Schema Registry infrastructure
 When thinking about production usage, the Schema Registry should be hosted on a server separate from our brokers, as figure 11.4 shows [6]. Because we deal with a distributed system and have learned to expect failures, we can provide multiple registry instances. And because all nodes can handle lookup requests from clients and route write requests to the primary node, the clients of the registry do not have to maintain a list of specific nodes.
 
 ### 11.2.2 Registry configuration
-Similar to the other components of Kafka, you can set several configuration parameters in a file. If you have installed Kafka, you’ll see the defaults located in the etc/schema-registry/schema-registry.properties file. For the registry to be successful, it needs to know which topic to store its schemas in and how to work with your specific Kafka cluster.
+Similar to the other components of Kafka, you can set several configuration parameters in a file. If you have installed Kafka, you’ll see the defaults located in the ``etc/schema-registry/schema-registry.properties`` file. For the registry to be successful, it needs to know which topic to store its schemas in and how to work with your specific Kafka cluster.
 
 In listing 11.1, we use ZooKeeper to help complete the election of the primary node. It’s important to note that because only the primary node writes to the Kafka topic. If your team is trying to move away from ZooKeeper dependencies, you can also use a Kafka-based primary election (using the configuration kafkastore.bootstrap .servers) [7].
 
