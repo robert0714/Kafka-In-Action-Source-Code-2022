@@ -11,7 +11,9 @@ Apache Kafka is an active Apache Software Foundation project, and over time, the
 
 
 
-> **⚠ TIP:**  Generally, Apache ZooKeeper and Kafka should not run on one physical server in a production environment if you want fault tolerance. For this book, we wanted to make sure you focus on learning Kafka features instead of managing mul> **⚠ TIP:** le servers while you’re learning.
+> **⚠ TIP:**  Generally, Apache ZooKeeper and Kafka should not run on one physical server in a production environment if you want fault tolerance. For this book, we wanted to make sure you focus on learning Kafka features instead of managing multiple servers while you’re learning.
+
+
 
 ## A.3 Installing Kafka on your local machine
 When some of the authors started using Kafka, one of the more straightforward options was to create a cluster on a single node by hand. Michael Noll, in the article “Running a Multi-Broker Apache Kafka 0.8 Cluster on a Single Node,” laid out the steps in a clear manner, as reflected in this section’s setup steps [2].
@@ -95,7 +97,7 @@ $ export PATH=$PATH:~/kafka_2.13-2.7.1/bin     ❶
 > **⚠ NOTE:**  For Windows users, you’ll find the .bat scripts under the bin/windows folder with the same names as the shell scripts used in the following examples. You can use Windows Subsystem for Linux 2 (WSL2) and run the same commands as you would use on Linux [1].
 
 ### A.3.4 Starting a ZooKeeper server
-The examples in this book use a single, local ZooKeeper server. The command in listing A.2 starts a single ZooKeeper server [2]. > **⚠ NOTE:**  that you’ll want to start ZooKeeper before you begin any Kafka brokers.
+The examples in this book use a single, local ZooKeeper server. The command in listing A.2 starts a single ZooKeeper server [2]. Note that you’ll want to start ZooKeeper before you begin any Kafka brokers.
 
 Listing A.2 Starting ZooKeeper
 ```shell
@@ -107,7 +109,7 @@ The next step is to create and configure a three-node cluster. To create your Ka
 
 Kafka comes with a set of predefined defaults. Run the commands in listing A.3 to create configuration files for each server in your cluster [2]. We will use the default server.properties file as a starting point. Then run the command in listing A.4 to open each configuration file and change the properties file [2].
 
-Listing A.3 Creating mul> **⚠ TIP:** le Kafka brokers
+Listing A.3 Creating multiple Kafka brokers
 ```shell
 $ cd ~/kafka_2.13-2.7.1                                  ❶
 $ cp config/server.properties config/server0.properties
