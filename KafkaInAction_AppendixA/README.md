@@ -220,3 +220,9 @@ zookeeper: running
 
 ❹ Validates that all components are up and running
 
+Runs a [Confluent Control Center](https://docs.confluent.io/platform/current/control-center/index.html) that exposes a UI at `http://localhost:9021/` .
+
+We can follow the startup by monitoring the output :
+```shell
+docker-compose logs -f
+```
